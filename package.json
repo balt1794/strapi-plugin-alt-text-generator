@@ -1,0 +1,101 @@
+{
+  "name": "@balt1794/strapi-plugin-alt-text-generator",
+  "version": "1.0.0",
+  "description": "Write SEO-friendly alt text for the images in your Strapi Media Library with AI, in 131 languages. Bulk generate, or automatically on upload.",
+  "keywords": [
+    "strapi",
+    "strapi-plugin",
+    "strapi-v5",
+    "alt-text",
+    "accessibility",
+    "seo",
+    "ai",
+    "media-library",
+    "images"
+  ],
+  "homepage": "https://alttextgeneratorai.com/integrations/strapi-plugin",
+  "bugs": {
+    "url": "https://github.com/balt1794/strapi-plugin-alt-text-generator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balt1794/strapi-plugin-alt-text-generator.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Bryam Loaiza",
+    "email": "balt1794@gmail.com"
+  },
+  "type": "commonjs",
+  "exports": {
+    "./package.json": "./package.json",
+    "./strapi-admin": {
+      "types": "./dist/admin/src/index.d.ts",
+      "source": "./admin/src/index.ts",
+      "import": "./dist/admin/index.mjs",
+      "require": "./dist/admin/index.js",
+      "default": "./dist/admin/index.js"
+    },
+    "./strapi-server": {
+      "types": "./dist/server/src/index.d.ts",
+      "source": "./server/src/index.ts",
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.js",
+      "default": "./dist/server/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "assets/logo.png"
+  ],
+  "scripts": {
+    "build": "strapi-plugin build",
+    "watch": "strapi-plugin watch",
+    "watch:link": "strapi-plugin watch:link",
+    "verify": "strapi-plugin verify",
+    "test:ts:front": "tsc -p admin/tsconfig.json",
+    "test:ts:back": "tsc -p server/tsconfig.json"
+  },
+  "dependencies": {
+    "@strapi/design-system": "^2.0.0",
+    "@strapi/icons": "^2.0.0"
+  },
+  "devDependencies": {
+    "@strapi/sdk-plugin": "^6.1.1",
+    "@strapi/strapi": "^5.60.0",
+    "@strapi/typescript-utils": "^5.60.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "prettier": "^3.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.3",
+    "sharp": "^0.34.0",
+    "styled-components": "^6.1.0",
+    "typescript": "^5.6.0"
+  },
+  "peerDependencies": {
+    "@strapi/sdk-plugin": "^6.1.1",
+    "@strapi/strapi": "^5.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "styled-components": "^6.0.0",
+    "sharp": "*"
+  },
+  "strapi": {
+    "kind": "plugin",
+    "name": "alt-text-generator",
+    "displayName": "Alt Text Generator",
+    "description": "Write SEO-friendly alt text for the images in your Strapi Media Library with AI, in 131 languages."
+  },
+  "engines": {
+    "node": ">=20.0.0 <=26.x.x"
+  },
+  "peerDependenciesMeta": {
+    "sharp": {
+      "optional": true
+    }
+  }
+}
