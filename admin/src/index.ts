@@ -9,7 +9,7 @@ export default {
       icon: PluginIcon,
       intlLabel: {
         id: `${PLUGIN_ID}.plugin.name`,
-        defaultMessage: 'Alt Text Generator',
+        defaultMessage: 'Alt Text Generator AI',
       },
       Component: async () => {
         const { App } = await import('./pages/App');

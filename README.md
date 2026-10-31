@@ -54,9 +54,19 @@ export default ({ env }) => ({
 
 There is no database change and nothing to migrate. Settings are kept in Strapi's own settings store.
 
+### In production
+
+A `.env` file is for local work. On a live server, set `ALT_TEXT_GENERATOR_API_KEY` as an environment variable where your site runs, then redeploy or restart:
+
+- **Strapi Cloud:** Settings → Variables.
+- **Railway, Render, Fly.io, Heroku, DigitalOcean:** the service's environment variables page.
+- **Docker or a VPS:** an `environment:` entry, `docker run -e`, or your process manager's env file.
+
+Strapi's `config/plugins.ts` above reads the same variable, so nothing else needs to change. Never commit the key to Git.
+
 ## Where to find it in the admin
 
-An **Alt Text Generator** link (with an image icon) is added to the left menu. It opens the plugin page. Only admin users who can read the Media Library see it.
+An **Alt Text Generator AI** link (with an image icon) is added to the left menu. It opens the plugin page. Only admin users who can read the Media Library see it.
 
 ## Use it
 

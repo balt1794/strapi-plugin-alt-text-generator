@@ -14,6 +14,7 @@ import {
 import { Layouts, Page, useFetchClient, useNotification } from '@strapi/strapi/admin';
 import { PLUGIN_ID } from '../pluginId';
 import { LANGUAGES } from '../utils/languages';
+import { LOGO_DATA_URI } from '../utils/logo';
 import { withBackendUrl } from '../utils/url';
 
 type Image = { id: number; name: string; url: string; alternativeText: string; mime: string };
@@ -194,7 +195,14 @@ export const App = () => {
   return (
     <Page.Main>
       <Layouts.Header
-        title="Alt Text Generator AI"
+        title={
+          (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}>
+              <img src={LOGO_DATA_URI} alt="" width={40} height={40} style={{ borderRadius: 8 }} />
+              Alt Text Generator AI
+            </span>
+          ) as unknown as string
+        }
         subtitle="Write SEO-friendly alt text for the images in your Media Library."
         primaryAction={
           <Flex gap={2}>
@@ -204,7 +212,6 @@ export const App = () => {
               </Button>
             ) : (
               <Button
-                variant="secondary"
                 disabled={targets.list.length === 0 || !settings?.hasApiKey}
                 onClick={() => generate(targets.list)}
               >
@@ -232,36 +239,41 @@ export const App = () => {
           )}
 
           <Box background="neutral0" hasRadius shadow="filterShadow" padding={6}>
-            <Flex gap={6} wrap="wrap" alignItems="flex-end">
-              <Box minWidth="260px">
-                <Typography variant="pi" fontWeight="bold" tag="label">
-                  Language
-                </Typography>
-                <Box paddingTop={1}>
-                  <SingleSelect
-                    aria-label="Language"
-                    value={settings?.language || 'english'}
-                    onChange={(value: string | number) => saveSettings({ language: String(value) })}
-                  >
-                    {LANGUAGES.map((l) => (
-                      <SingleSelectOption key={l.value} value={l.value}>
-                        {l.label}
-                      </SingleSelectOption>
-                    ))}
-                  </SingleSelect>
+            <Flex direction="column" alignItems="stretch" gap={5}>
+              <Flex gap={6} wrap="wrap" justifyContent="space-between" alignItems="flex-end">
+                <Box minWidth="260px">
+                  <Typography variant="pi" fontWeight="bold" tag="label">
+                    Language
+                  </Typography>
+                  <Box paddingTop={1}>
+                    <SingleSelect
+                      aria-label="Language"
+                      value={settings?.language || 'english'}
+                      onChange={(value: string | number) => saveSettings({ language: String(value) })}
+                    >
+                      {LANGUAGES.map((l) => (
+                        <SingleSelectOption key={l.value} value={l.value}>
+                          {l.label}
+                        </SingleSelectOption>
+                      ))}
+                    </SingleSelect>
+                  </Box>
                 </Box>
-              </Box>
+                <Flex direction="column" alignItems="flex-end" gap={1}>
+                  <Typography variant="pi" textColor="neutral600">
+                    Credits left
+                  </Typography>
+                  <Typography variant="alpha" fontWeight="bold">
+                    {credits === null ? '—' : credits}
+                  </Typography>
+                </Flex>
+              </Flex>
               <Checkbox
                 checked={settings?.autoGenerate || false}
                 onCheckedChange={(value: boolean | 'indeterminate') => saveSettings({ autoGenerate: value === true })}
               >
                 Write alt text automatically when an image is uploaded
               </Checkbox>
-              <Box paddingLeft="auto">
-                <Typography variant="omega" textColor="neutral600">
-                  {credits === null ? 'Credits: —' : `Credits left: ${credits}`}
-                </Typography>
-              </Box>
             </Flex>
           </Box>
 
